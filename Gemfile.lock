@@ -221,7 +221,7 @@ DEPENDENCIES
   capybara
   debug
   faker (~> 2.22)
-  font-awesome-rails
+  font-awesome-rails (~> 4.7)
   importmap-rails
   jbuilder
   puma (~> 5.0)
