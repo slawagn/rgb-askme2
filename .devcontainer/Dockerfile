@@ -13,7 +13,7 @@ RUN adduser code sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER code
 
-WORKDIR /workspaces/askme
+WORKDIR /workspaces/askme2
 
 COPY Gemfile Gemfile.lock ./
-RUN bundle install
+RUN sudo bundle install
