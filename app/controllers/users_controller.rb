@@ -6,8 +6,16 @@ class UsersController < ApplicationController
   def create
     user_params = params.require(:user).permit(:name, :nickname, :email, :password)
 
-    User.create(user_params)
+    user = User.create(user_params)
 
-    redirect_to root_path, notice: 'Вы успешно зарегистрировались!'
+    if (user.save)
+      log_in_as(user)
+
+      redirect_to root_path, notice: 'Вы успешно зарегистрировались!'
+    else
+      flash.now[:alert] = 'Что-то пошло не так!'
+
+      render :new
+    end
   end
 end
