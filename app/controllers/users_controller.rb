@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def create
     user_params = params.require(:user).permit(:name, :nickname, :email, :password)
 
-    user = User.create(user_params)
+    user = User.new(user_params)
 
     if (user.save)
       log_in_as(user)
