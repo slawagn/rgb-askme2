@@ -1,0 +1,33 @@
+.navbar {
+  align-items: center;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+}
+
+.navbar button {
+  color: white;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.navbar-red {
+  background-color: #370617;
+}
+
+.navbar-orange {
+  background-color: #c66d00;
+}
+
+.navbar-blue {
+  background-color: #061b37;
+}
+
+.navbar-pink {
+  background-color: #a8094b;
+}
