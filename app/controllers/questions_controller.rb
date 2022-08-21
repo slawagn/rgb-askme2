@@ -29,7 +29,7 @@ class QuestionsController < ApplicationController
 
   def index
     @question = Question.new
-    @questions = Question.all
+    @questions = Question.latest.all
   end
 
   def new
