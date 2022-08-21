@@ -17,6 +17,7 @@
 
 form > p {
   display: flex;
+  align-items: center;
 }
 
 form > p > * {
