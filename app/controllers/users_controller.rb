@@ -50,8 +50,7 @@ class UsersController < ApplicationController
         :nickname,
         :email,
         :password,
-        :password_confirmation,
-        :header_color
+        :password_confirmation
       )
   end
 end

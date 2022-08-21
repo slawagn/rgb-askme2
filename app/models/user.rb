@@ -1,8 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
 
-  enum :header_color, { red: 0, orange: 1, blue: 2, pink: 3 }
-
   before_save :downcase_nickname
 
   validates :email,
