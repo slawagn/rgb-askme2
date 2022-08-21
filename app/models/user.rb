@@ -16,5 +16,5 @@ class User < ApplicationRecord
     length:     { minimum: 4, maximum: 40 }
 
   validates :header_color,
-    format: { with: /#[0-9A-Z]{6}/i }
+    format: { with: /#[0-9A-Z]{6}/i }, allow_nil: true
 end
