@@ -20,7 +20,13 @@
       <p class="mt"><%= form.label :header_color, 'Цвет шапки' %></p>
       <p data-controller="color-picker">
         <%= form.color_field :header_color,
-          value: header_color(current_user)
+          value: header_color(current_user),
+          'data-color-picker-target': 'picker'
+        %>
+        <%= button_tag "По умолчанию",
+          type: 'button',
+          'data-action': "click->color-picker#set",
+          'data-color-picker-color-param': default_header_color
         %>
       </p>
 
