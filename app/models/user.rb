@@ -3,7 +3,8 @@ class User < ApplicationRecord
 
   enum :header_color, { red: 0, orange: 1, blue: 2, pink: 3 }
 
-  before_save :downcase_nickname
+  before_validation { nickname.downcase! }
+  before_validation { email.downcase! }
 
   validates :email,
     presence:   true,
@@ -15,8 +16,4 @@ class User < ApplicationRecord
     uniqueness: true,
     format:     { with: /\A[a-zA-Z0-9_]+\Z/ },
     length:     { minimum: 4, maximum: 40 }
-
-  def downcase_nickname
-    nickname.downcase!
-  end
 end
