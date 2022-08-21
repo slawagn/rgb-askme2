@@ -1,8 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
 
-  enum :header_color, { red: 0, orange: 1, blue: 2, pink: 3 }
-
   before_validation { nickname.downcase! }
   before_validation { email.downcase! }
 
@@ -16,4 +14,7 @@ class User < ApplicationRecord
     uniqueness: true,
     format:     { with: /\A[a-zA-Z0-9_]+\Z/ },
     length:     { minimum: 4, maximum: 40 }
+
+  validates :header_color,
+    format: { with: /#[0-9A-Z]{6}/i }
 end

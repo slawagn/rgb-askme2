@@ -17,6 +17,19 @@
       <p class="mt"><%= form.label :nickname, 'Ник на сайте' %></p>
       <p><%= form.text_field :nickname, class: 'form-text-field' %></p>
 
+      <p class="mt"><%= form.label :header_color, 'Цвет шапки' %></p>
+      <p data-controller="color-picker">
+        <%= form.color_field :header_color,
+          value: header_color(current_user),
+          'data-color-picker-target': 'picker'
+        %>
+        <%= button_tag "По умолчанию",
+          type: 'button',
+          'data-action': "click->color-picker#set",
+          'data-color-picker-color-param': default_header_color
+        %>
+      </p>
+
       <p class="mt-lg text-sm">Если не хотите менять пароль — оставьте эти поля пустыми!</p>
 
       <p class="mt"><%= form.label :password, 'Пароль' %></p>
@@ -24,9 +37,6 @@
 
       <p class="mt"><%= form.label :password_confirmation, 'Подтверждение пароля' %></p>
       <p><%= form.password_field :password_confirmation, class: 'form-text-field' %></p>
-
-      <p class="mt"><%= form.label :header_color, 'Цвет шапки' %></p>
-      <p><%= form.select :header_color, header_color_selection_hash, {}, class: 'form-select-field' %></p>
 
       <p class="mt-lg">
         <%= form.submit "Сохранить", class: 'button button-main' %>

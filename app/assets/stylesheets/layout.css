@@ -18,3 +18,23 @@ body {
 .navbar {
   padding: 20px;
 }
+
+.navbar {
+  align-items: center;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+}
+
+.navbar button,
+.navbar .button {
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+}

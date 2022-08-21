@@ -3,30 +3,15 @@ module UsersHelper
     "@#{nickname}"
   end
 
-  def css_header_color_for_user(user)
-    if user.nil?
-      "navbar-red"
-    else
-      "navbar-#{user.header_color}"
-    end
+  def default_header_color
+    '#370617'
   end
 
-  def color_human_readable(color)
-    case color
-    when 'red'
-      'красный'
-    when 'orange'
-      'оранжевый'
-    when 'blue'
-      'синий'
-    when 'pink'
-      'розовый'
-    end
+  def header_color(user)
+    user&.header_color || default_header_color
   end
 
-  def header_color_selection_hash
-    User.header_colors.keys.to_h do |color|
-      [color_human_readable(color).capitalize, color]
-    end
+  def header_color_css(user)
+    "style=background-color:#{header_color(user)}"
   end
 end
