@@ -21,7 +21,6 @@ body {
 
 .navbar {
   align-items: center;
-  background-color: #370617;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -30,4 +29,12 @@ body {
 .navbar a {
   color: white;
   text-decoration: none;
+}
+
+.navbar button,
+.navbar .button {
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
 }
