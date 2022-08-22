@@ -3,15 +3,9 @@ module UsersHelper
     "@#{nickname}"
   end
 
-  def default_header_color
-    '#370617'
-  end
-
-  def header_color(user)
-    user&.header_color || default_header_color
-  end
-
-  def header_color_css(user)
-    "style=background-color:#{header_color(user)}"
+  def header_color_style(user)
+    color = user&.header_color || User::DEFAULT_HEADER_COLOR
+    
+    "style=background-color:#{color}"
   end
 end

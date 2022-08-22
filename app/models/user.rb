@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  DEFAULT_HEADER_COLOR = '#370617'
+
+  attribute :header_color, default: DEFAULT_HEADER_COLOR
   has_secure_password
 
   before_validation { nickname.downcase! }
@@ -16,5 +19,6 @@ class User < ApplicationRecord
     length:     { minimum: 4, maximum: 40 }
 
   validates :header_color,
-    format: { with: /#[0-9A-Z]{6}/i }, allow_nil: true
+    presence: true,
+    format: { with: /\A#([[:xdigit:]]{3}){1,2}\Z/i }
 end
