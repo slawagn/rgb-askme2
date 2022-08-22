@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :find_user_by_id, only: %i[show edit update destroy]
+  before_action :authorize_owner, only: %i[edit update destroy]
+  
   def new
     @user = User.new
   end
@@ -15,13 +18,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @questions = @user.questions.latest
+    @question  = Question.new(user: @user)
+  end
+
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
-
     if @user.update(user_params)
       redirect_to root_path, notice: 'Данные пользователя обновлены'
     else
@@ -32,7 +37,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
 
     session.delete(:user_id)
@@ -53,5 +57,13 @@ class UsersController < ApplicationController
         :password_confirmation,
         :header_color
       )
+  end
+
+  def find_user_by_id
+    @user = User.find(params[:id])
+  end
+
+  def authorize_owner
+    redirect_forbidden unless current_user == @user
   end
 end

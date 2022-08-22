@@ -2,48 +2,60 @@
   <%= simple_format(h(question.body)) %>
 </div>
 
+<% if question.answer.present? %>
+  <div class="mb-sm text-dark-red">
+    <%= simple_format(h(question.answer)) %>
+  </div>
+<% end %>
+
 <div class="text-sm question-footer">
   <div class="text-grey">
     <%= l(question.created_at, format: :short) %>
   </div>
 
-  <div>
-    <%=
-      link_to(
-        fa_icon('pencil'),
-        edit_question_path(question),
-        title: 'Изменить вопрос'
-      )
-    %>
+  <% if current_user == question.user %>
+    <div>
+      <% edit_icon = question.answer.present? ? 'pencil' : 'reply' %>
+      <% edit_icon_title = question.answer.present? ? 'Изменить' : 'Ответить' %>
 
-    <%=
-      button_to(
-        fa_icon('trash-o'),
-        question_path(question),
-        method: :delete,
-        title: 'Удалить вопрос',
-        form: {
-          data: {
-            turbo_confirm: 'Точно удалить вопрос?'
-          }
-        }
-      )
-    %>
+      <%=
+        link_to(
+          fa_icon(edit_icon),
+          edit_question_path(question),
+          title: edit_icon_title,
+          class: 'mr-sm'
+        )
+      %>
 
-    <% unless question.hidden? %>
       <%=
         button_to(
-          fa_icon('eye-slash'),
-          hide_question_path(question),
-          method: :put,
-          title: 'Скрыть вопрос',
+          fa_icon('trash-o'),
+          question_path(question),
+          method: :delete,
+          title: 'Удалить вопрос',
           form: {
             data: {
-              turbo_confirm: 'Точно скрыть вопрос?'
+              turbo_confirm: 'Точно удалить вопрос?'
             }
           }
         )
       %>
-    <% end %>
-  </div>
+
+      <% unless question.hidden? %>
+        <%=
+          button_to(
+            fa_icon('eye-slash'),
+            hide_question_path(question),
+            method: :put,
+            title: 'Скрыть вопрос',
+            form: {
+              data: {
+                turbo_confirm: 'Точно скрыть вопрос?'
+              }
+            }
+          )
+        %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

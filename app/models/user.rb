@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   DEFAULT_HEADER_COLOR = '#370617'
 
+  has_many :questions, dependent: :delete_all
+
   attribute :header_color, default: DEFAULT_HEADER_COLOR
   has_secure_password
 

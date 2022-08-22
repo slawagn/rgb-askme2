@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
   def log_in_as(user)
     session[:user_id] = user.id
   end
+
+  def redirect_forbidden
+    redirect_to root_path, alert: 'Вам сюда нельзя!'
+  end
 end

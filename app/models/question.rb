@@ -1,4 +1,6 @@
 class Question < ApplicationRecord
+  belongs_to :user
+
   scope :latest, -> { order(created_at: :desc) }
 
   validates :body,

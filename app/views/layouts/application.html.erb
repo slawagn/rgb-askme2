@@ -16,19 +16,33 @@
         <p class="title-sm text-bold"><%= link_to 'Ask me!', root_path %></p>
         <div>
           <% if current_user.present? %>
-            <%= link_to nickname_for_display(current_user.nickname), edit_user_path(current_user), class: 'mr-sm' %>
-            <%= button_to 'Выйти', session_path, method: :delete %>
+            <%= link_to nickname_for_display(current_user.nickname),
+              user_path(current_user),
+              class: 'mr-sm' %>
+
+            <%= button_to 'Выйти',
+              session_path,
+              method: :delete %>
           <% else %>
-            <%= link_to 'Регистрация', new_user_path, class: 'button mr-sm' %>
-            <%= link_to 'Вход', new_session_path, class: 'button' %>
+            <%= link_to 'Регистрация',
+              new_user_path,
+              class: 'button mr-sm' %>
+            
+            <%= link_to 'Вход',
+              new_session_path,
+              class: 'button' %>
           <% end %>
         </div>
       </div>
 
       <% if flash[:notice].present? %>
-        <p class="mb mt message message-notice"><%= flash[:notice] %></p>
+        <p class="mb mt message message-notice">
+          <%= flash[:notice] %>
+        </p>
       <% elsif flash[:alert].present? %>
-        <p class="mb mt message message-alert"><%= flash[:alert] %></p>
+        <p class="mb mt message message-alert">
+          <%= flash[:alert] %>
+        </p>
       <% end %>
 
       <%= yield %>

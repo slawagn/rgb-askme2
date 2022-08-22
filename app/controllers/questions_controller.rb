@@ -1,42 +1,49 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: %i[update show destroy edit hide]
+  before_action :set_question, only: %i[show edit update destroy hide]
+  before_action :authorize_question_owner, only: %i[edit update destroy hide]
+
+  def index
+    @question = Question.new
+    @questions = Question.latest
+  end
+
+  def new
+    @user = User.find(params[:user_id])
+    @question = Question.new(user: @user)
+  end
 
   def create 
+    question_params = params.require(:question).permit(:body, :user_id)
+    
     @question = Question.new(question_params)
 
     if @question.save
-      redirect_to question_path(@question), notice: 'Новый вопрос создан!'
+      redirect_to user_path(@question.user), notice: 'Новый вопрос создан!'
     else
       flash.now[:alert] = 'Что-то пошло не так!'
       render :new
     end
   end
 
-  def update
-    @question.update(question_params)
-
-    redirect_to question_path(@question), notice: 'Сохранили вопрос!'
-  end
-
-  def destroy
-    @question.destroy
-
-    redirect_to questions_path, notice: 'Вопрос удалён!'
-  end
-
   def show
   end
 
-  def index
-    @question = Question.new
-    @questions = Question.latest.all
-  end
-
-  def new
-    @question = Question.new
-  end
-
   def edit
+  end
+
+  def update
+    question_params = params.require(:question).permit(:body, :answer)
+    
+    @question.update(question_params)
+
+    redirect_to user_path(@question.user), notice: 'Сохранили вопрос!'
+  end
+
+  def destroy
+    @user = @question.user
+    @question.destroy
+
+    redirect_to user_path(@user), notice: 'Вопрос удалён!'
   end
 
   def hide
@@ -47,8 +54,8 @@ class QuestionsController < ApplicationController
 
   private
 
-  def question_params
-    params.require(:question).permit(:body, :user_id)
+  def authorize_question_owner
+    redirect_forbidden unless @question.user == current_user  
   end
 
   def set_question
