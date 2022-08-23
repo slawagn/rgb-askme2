@@ -26,5 +26,5 @@ class User < ApplicationRecord
 
   validates :header_color,
     presence: true,
-    format: { with: /\A#([[:xdigit:]]{3}){1,2}\Z/i }
+    format: { with: /\A#[[:xdigit:]]{3}{1,2}\Z/ }
 end
