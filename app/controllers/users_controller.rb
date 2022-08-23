@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :find_user_by_id, only: %i[show edit update destroy]
+  before_action :find_user_by_nickname, only: %i[show edit update destroy]
   before_action :authorize_owner, only: %i[edit update destroy]
   
   def new
@@ -59,8 +59,8 @@ class UsersController < ApplicationController
       )
   end
 
-  def find_user_by_id
-    @user = User.find(params[:id])
+  def find_user_by_nickname
+    @user = User.find_by(nickname: params[:nickname])
   end
 
   def authorize_owner
