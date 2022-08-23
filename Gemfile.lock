@@ -101,6 +101,7 @@ GEM
       railties (>= 3.2, < 8.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    gravtastic (3.2.6)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.0.1)
@@ -275,6 +276,7 @@ DEPENDENCIES
   debug
   faker (~> 2.22)
   font-awesome-rails (~> 4.7)
+  gravtastic (~> 3.2)
   importmap-rails
   jbuilder
   pg (~> 1.4)

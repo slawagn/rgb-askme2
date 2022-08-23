@@ -6,6 +6,8 @@ class User < ApplicationRecord
   attribute :header_color, default: DEFAULT_HEADER_COLOR
   has_secure_password
 
+  scope :latest, -> { order(created_at: :desc) }
+
   before_validation { nickname.downcase! }
   before_validation { email.downcase! }
 
@@ -33,4 +35,7 @@ class User < ApplicationRecord
   validates :header_color,
     presence: true,
     format: { with: /\A#[[:xdigit:]]{3}{1,2}\Z/ }
+  
+  include Gravtastic
+  gravtastic(secure: true, filetype: :png, size: 100, default: 'retro')
 end

@@ -3,8 +3,8 @@ class QuestionsController < ApplicationController
   before_action :authorize_question_owner, only: %i[edit update destroy hide]
 
   def index
-    @question = Question.new
-    @questions = Question.latest
+    @questions = Question.latest.first(10)
+    @users     = User.latest.first(10)
   end
 
   def new
