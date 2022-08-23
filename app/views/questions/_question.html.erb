@@ -10,7 +10,8 @@
 
 <div class="text-sm question-footer">
   <div class="text-grey">
-    <%= l(question.created_at, format: :short) %>
+    <%= l(question.created_at, format: :short) %>,
+    <%= author_display(question) %>
   </div>
 
   <% if current_user == question.user %>
