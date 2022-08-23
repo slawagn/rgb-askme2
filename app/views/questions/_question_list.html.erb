@@ -1,0 +1,12 @@
+<div class='container mt-sm'>
+  <h2 class='title-lg'>
+    <%= questions.count %>
+    <%= inclination(questions.count, 'вопрос', 'вопроса', 'вопросов') %>
+  </h2>
+</div>
+
+<% questions.each do |question| %>
+  <div class='mt-sm container<%= ' transparent' if question.hidden? %>'>
+    <%= render question %>
+  </div>
+<% end %>
