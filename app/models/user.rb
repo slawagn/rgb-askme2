@@ -1,7 +1,15 @@
 class User < ApplicationRecord
   DEFAULT_HEADER_COLOR = '#370617'
 
-  has_many :questions, dependent: :delete_all
+  has_many :questions_received,
+    class_name:  'Question',
+    foreign_key: 'user_id',
+    dependent:   :delete_all
+
+  has_many :questions_created,
+    class_name:  'Question',
+    foreign_key: 'author_id',
+    dependent:   :nullify
 
   attribute :header_color, default: DEFAULT_HEADER_COLOR
   has_secure_password

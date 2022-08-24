@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @questions = @user.questions.latest
+    @questions = @user.questions_received.latest
     @question  = Question.new(user: @user)
   end
 
