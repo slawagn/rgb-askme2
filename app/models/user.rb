@@ -16,21 +16,13 @@ class User < ApplicationRecord
     length: { maximum: 40 }
 
   validates :email,
-    presence:   true
-  
-  validates :email,
     uniqueness: true,
-    format:     { with: URI::MailTo::EMAIL_REGEXP },
-    if:         -> { email.present? }
-
-  validates :nickname,
-    presence:   true
+    format:     { with: URI::MailTo::EMAIL_REGEXP }
 
   validates :nickname,
     uniqueness: true,
-    format:     { with: /\A[a-zA-Z0-9_]+\Z/ },
     length:     { minimum: 4, maximum: 40 },
-    if:         -> { nickname.present? }
+    format:     { with: /\A[a-zA-Z0-9_]+\Z/ }
 
   validates :header_color,
     presence: true,
