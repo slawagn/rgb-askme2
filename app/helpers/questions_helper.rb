@@ -7,7 +7,7 @@ module QuestionsHelper
     if question.author.nil?
       'Аноним'
     else
-      link_to author_nickname(question), user_path(question.author)
+      link_to author_nickname(question), user_path(question.author.nickname)
     end
   end
 end

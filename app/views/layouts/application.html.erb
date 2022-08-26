@@ -17,7 +17,7 @@
         <div>
           <% if current_user.present? %>
             <%= link_to nickname_for_display(current_user.nickname),
-              user_path(current_user),
+              user_path(current_user.nickname),
               class: 'mr-sm' %>
 
             <%= button_to 'Выйти',

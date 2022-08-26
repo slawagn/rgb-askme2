@@ -60,7 +60,7 @@ class UsersController < ApplicationController
   end
 
   def find_user_by_nickname
-    @user = User.find_by(nickname: params[:nickname])
+    @user = User.find_by!(nickname: params[:nickname].downcase)
   end
 
   def authorize_owner
