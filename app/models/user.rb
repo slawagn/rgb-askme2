@@ -19,8 +19,8 @@ class User < ApplicationRecord
     foreign_key: 'author_id',
     dependent:   :nullify
 
-  before_validation { nickname.downcase! }
-  before_validation { email.downcase! }
+  before_validation { downcase!(nickname) }
+  before_validation { downcase!(email) }
 
   validates :name,
     presence: true,
@@ -38,4 +38,10 @@ class User < ApplicationRecord
   validates :header_color,
     presence: true,
     format: { with: /\A#[[:xdigit:]]{3}{1,2}\Z/ }
+
+  private
+
+  def downcase!(string)
+    string.downcase! if string.is_a? String
+  end
 end
