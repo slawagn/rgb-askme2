@@ -19,8 +19,7 @@ class User < ApplicationRecord
     foreign_key: 'author_id',
     dependent:   :nullify
 
-  before_validation { downcase!(nickname) }
-  before_validation { downcase!(email) }
+  before_validation { downcase_attributes(nickname, email) }
 
   validates :name,
     presence: true,
@@ -41,7 +40,9 @@ class User < ApplicationRecord
 
   private
 
-  def downcase!(string)
-    string.downcase! if string.is_a? String
+  def downcase_attributes(*attributes)
+    attributes.each do |attribute|
+      attribute&.downcase!
+    end
   end
 end
