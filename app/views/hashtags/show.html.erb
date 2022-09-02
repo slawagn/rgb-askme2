@@ -1,0 +1,7 @@
+<div class='user-box'>
+  <h2 class='title-lg mt-lg mb-lg'>
+    #<%= @hashtag.tag %>
+  </h2>
+</div>
+
+<%= render 'questions/question_list', questions: @hashtag.questions %>
