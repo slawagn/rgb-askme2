@@ -10,4 +10,8 @@ module QuestionsHelper
       link_to author_nickname(question), user_path(question.author.nickname)
     end
   end
+
+  def hashtag_display(tag)
+    link_to "##{tag}", hashtag_path(tag)
+  end
 end
