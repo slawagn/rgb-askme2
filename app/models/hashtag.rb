@@ -6,4 +6,13 @@ class Hashtag < ApplicationRecord
 
   validates :tag,
     uniqueness: true
+  
+  scope :top, -> {
+    Hashtag
+      .left_joins(:hashtag_questions)
+      .group(:id)
+      .order(
+        Arel.sql('COUNT(hashtags.id) DESC')
+      )
+  }
 end

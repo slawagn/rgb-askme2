@@ -5,6 +5,7 @@ class QuestionsController < ApplicationController
   def index
     @questions = Question.latest.first(10)
     @users     = User.latest.first(10)
+    @hashtags  = Hashtag.top.first(10) 
   end
 
   def new

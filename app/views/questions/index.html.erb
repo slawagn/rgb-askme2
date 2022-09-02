@@ -11,6 +11,18 @@
 </div>
 
 <div class="container mt-sm">
+  <h2 class="title-lg mb">
+    Популярно
+  </h2>
+
+  <div class="container">
+    <% @hashtags.each do |hashtag| %>
+      <%= hashtag_display(hashtag.tag) %>
+    <% end %>
+  </div>
+</div>
+
+<div class="container mt-sm">
   <h2 class="title-lg">
     <%= inclination(@questions.count, 'Последний', 'Последние', 'Последние') %>
     <%= @questions.count %>
