@@ -34,7 +34,7 @@ class Question < ApplicationRecord
       body.scan(hashtag_regex).each do |tag_string|
         tag_string = tag_string.downcase.delete_prefix('#')
         
-        hashtag = Hashtag.first_or_create(tag: tag_string)
+        hashtag = Hashtag.where(tag: tag_string).first_or_create
 
         hashtag_questions.create!(hashtag: hashtag, question: self)
       end
