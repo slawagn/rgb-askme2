@@ -26,18 +26,27 @@ class Question < ApplicationRecord
   private
 
   def create_hashtags
-    hashtag_regex = /#[[:word:]+-]+/i
+    tags = scan_string_for_hashtags(body)
+    tags.concat(scan_string_for_hashtags(answer)) unless answer.nil?
+    tags.uniq!
 
     ActiveRecord::Base.transaction do
       hashtag_questions.destroy_all
 
-      body.scan(hashtag_regex).each do |tag_string|
-        tag_string = tag_string.downcase.delete_prefix('#')
-        
-        hashtag = Hashtag.where(tag: tag_string).first_or_create
-
+      tags.each do |tag|
+        hashtag = Hashtag.where(tag: tag).first_or_create
         hashtag_questions.create!(hashtag: hashtag, question: self)
       end
     end
+  end
+
+  def scan_string_for_hashtags(string)
+    hashtag_regex = /#[[:word:]+-]+/i
+
+    string    
+      .scan(hashtag_regex)
+      .map do |tag_string|
+        tag_string.downcase.delete_prefix('#')
+      end
   end
 end
