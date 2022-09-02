@@ -32,7 +32,7 @@ class Question < ApplicationRecord
       hashtag_questions.destroy_all
 
       body.scan(hashtag_regex).each do |tag_string|
-        tag_string.downcase!
+        tag_string = tag_string.downcase.delete_prefix('#')
         
         hashtag = Hashtag.first_or_create(tag: tag_string)
 
