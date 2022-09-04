@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :hashtags, only: %i[show], param: :tag
   root to: 'questions#index'
   
   resources :questions do
@@ -7,8 +6,9 @@ Rails.application.routes.draw do
       put 'hide'
     end
   end
-
+  resources :hashtags, only: %i[show], param: :tag
+  
   resource :session, only: %i[new create destroy]
-
+  
   resources :users, except: %i[index], param: :nickname
 end

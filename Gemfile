@@ -10,6 +10,7 @@ gem "gravtastic", "~> 3.2"
 gem 'importmap-rails'
 gem 'jbuilder'
 gem 'puma', '~> 5.0'
+gem "recaptcha", "~> 5.12"
 gem 'rails', '~> 7.0.1'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
@@ -17,6 +18,7 @@ gem 'turbo-rails'
 
 group :development, :test do
   gem 'debug', platforms: %i[ mri mingw x64_mingw ]
+  gem "dotenv-rails", "~> 2.8"
   gem 'faker', '~> 2.22'
   gem 'sqlite3', '~> 1.4'
   gem 'solargraph', '~> 0.45.0'
@@ -35,3 +37,4 @@ end
 group :production do
   gem 'pg', '~> 1.4'
 end
+

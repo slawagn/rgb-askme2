@@ -93,6 +93,10 @@ GEM
       reline (>= 0.2.7)
     diff-lcs (1.5.0)
     digest (3.1.0)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     e2mmap (0.1.0)
     erubi (1.10.0)
     faker (2.22.0)
@@ -188,6 +192,8 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.0.6)
+    recaptcha (5.12.1)
+      json
     regexp_parser (2.2.0)
     reline (0.3.1)
       io-console (~> 0.5)
@@ -274,6 +280,7 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
+  dotenv-rails (~> 2.8)
   faker (~> 2.22)
   font-awesome-rails (~> 4.7)
   gravtastic (~> 3.2)
@@ -282,6 +289,7 @@ DEPENDENCIES
   pg (~> 1.4)
   puma (~> 5.0)
   rails (~> 7.0.1)
+  recaptcha (~> 5.12)
   selenium-webdriver
   solargraph (~> 0.45.0)
   sprockets-rails

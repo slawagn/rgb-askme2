@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
 
     @question.author = current_user
 
-    if @question.save
+    if check_captcha(@question) && @question.save
       redirect_to user_path(@question.user.nickname), notice: 'Новый вопрос создан!'
     else
       flash.now[:alert] = 'Что-то пошло не так!'
@@ -63,5 +63,13 @@ class QuestionsController < ApplicationController
 
   def set_question
     @question = Question.find(params[:id])
+  end
+
+  def check_captcha(model)
+    if current_user.present?
+      true
+    else
+      verify_recaptcha(model: model)
+    end
   end
 end
