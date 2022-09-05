@@ -41,10 +41,8 @@ class Question < ApplicationRecord
   end
 
   def scan_string_for_hashtags(string)
-    hashtag_regex = /#[[:word:]+-]+/i
-
     string    
-      .scan(hashtag_regex)
+      .scan(Hashtag::REGEX)
       .map do |tag_string|
         tag_string.downcase.delete_prefix('#')
       end

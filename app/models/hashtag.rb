@@ -1,4 +1,6 @@
 class Hashtag < ApplicationRecord
+  REGEX = /#[[:word:]+-]+/i
+
   has_many :hashtag_questions
 
   has_many :questions,
