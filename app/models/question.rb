@@ -26,9 +26,7 @@ class Question < ApplicationRecord
   private
 
   def create_hashtags
-    tags = scan_string_for_hashtags(body)
-    tags.concat(scan_string_for_hashtags(answer)) unless answer.nil?
-    tags.uniq!
+    tags = scan_strings_for_hashtags(body, answer)
 
     ActiveRecord::Base.transaction do
       self.hashtag_questions.destroy_all
@@ -36,11 +34,12 @@ class Question < ApplicationRecord
     end
   end
 
-  def scan_string_for_hashtags(string)
-    string    
+  def scan_strings_for_hashtags(*strings)
+    strings.join(' ')
       .scan(Hashtag::REGEX)
       .map do |tag_string|
         tag_string.downcase.delete_prefix('#')
       end
+      .uniq
   end
 end
