@@ -1,10 +1,10 @@
 <div class="mb-sm">
-  <%= simple_format(h(question.body)) %>
+  <%= text_with_links_to_hashtags(text_with_linebreaks(question.body)) %>
 </div>
 
 <% if question.answer.present? %>
   <div class="mb-sm text-dark-red">
-    <%= simple_format(h(question.answer)) %>
+    <%= text_with_links_to_hashtags(text_with_linebreaks(question.answer)) %>
   </div>
 <% end %>
 
@@ -12,12 +12,6 @@
   <div class="text-grey">
     <%= l(question.created_at, format: :short) %>,
     <%= author_display(question) %>
-  </div>
-
-  <div>
-    <% question.hashtags.each do |hashtag| %>
-      <%= hashtag_display(hashtag.tag) %>
-    <% end %>
   </div>
 
   <% if current_user == question.user %>
