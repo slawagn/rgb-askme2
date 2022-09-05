@@ -31,12 +31,8 @@ class Question < ApplicationRecord
     tags.uniq!
 
     ActiveRecord::Base.transaction do
-      hashtag_questions.destroy_all
-
-      tags.each do |tag|
-        hashtag = Hashtag.where(tag: tag).first_or_create
-        hashtag_questions.create!(hashtag: hashtag, question: self)
-      end
+      self.hashtag_questions.destroy_all
+      self.hashtags = tags.map { |tag| Hashtag.find_or_create_by!(tag: tag) }
     end
   end
 
