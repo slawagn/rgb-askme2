@@ -24,6 +24,6 @@ production:
   adapter:  postgresql
   encoding: unicode
   pool:     <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  database: askme2_production 
-  username: askme2
+  database: <%= ENV["MYAPP_DATABASE_NAME"] %>
+  username: <%= ENV["MYAPP_DATABASE_USERNAME"] %>
   password: <%= ENV["MYAPP_DATABASE_PASSWORD"] %>
