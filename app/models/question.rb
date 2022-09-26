@@ -28,10 +28,7 @@ class Question < ApplicationRecord
   def create_hashtags
     tags = scan_strings_for_hashtags(body, answer)
 
-    ActiveRecord::Base.transaction do
-      self.hashtag_questions.destroy_all
-      self.hashtags = tags.map { |tag| Hashtag.find_or_create_by!(tag: tag) }
-    end
+    self.hashtags = tags.map { |tag| Hashtag.find_or_create_by!(tag: tag) }
   end
 
   def scan_strings_for_hashtags(*strings)
