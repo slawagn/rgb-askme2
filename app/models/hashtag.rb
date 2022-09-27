@@ -8,10 +8,11 @@ class Hashtag < ApplicationRecord
 
   validates :tag,
     uniqueness: true
-  
+
+  scope :not_empty, -> { Hashtag.joins(:questions).group('hashtags.id').having('COUNT(questions.id) > 0') }
+    
   scope :top, -> {
-    Hashtag
-      .left_joins(:hashtag_questions)
+    left_joins(:hashtag_questions)
       .group(:id)
       .order(
         Arel.sql('COUNT(hashtags.id) DESC')
